@@ -1,0 +1,2 @@
+(base) Harshals-MacBook-Air:problem2 harshaltarmale$ sort duplicates.txt | uniq -u
+HI MY NAME IS HARSHAL TARMALE.
