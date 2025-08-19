@@ -1,0 +1,3 @@
+abc.txt
+Tue Aug 19 14:31:55 IST 2025
+       2
