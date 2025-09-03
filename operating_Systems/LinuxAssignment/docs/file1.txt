@@ -1,2 +1,4 @@
 Hi this is file 1
-Checking GitHub changes
+Checking GitHub changesChecking GitHub changes
+Hi this is file 1
+
