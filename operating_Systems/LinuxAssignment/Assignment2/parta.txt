@@ -1,0 +1,78 @@
+What will the following commands do?
+
+ echo "Hello, World!"
+gives system output "Hello, World!"
+
+
+ name="Productive"
+Saves string "Productive" in variable name
+
+ touch file.txt
+Creates File name file.txt
+
+ ls -a
+Iist all the directories and files including starting with "."(Hidden)
+
+ rm file.txt
+Removes file file.txt
+
+
+ cp file1.txt file2.txt
+copies content of file1.txt to file2.txt
+
+
+ mv file.txt /path/to/directory/
+move file file.txt to stated directory
+
+
+ chmod 755 script.sh
+changes the flie script.sh permissions to User(read write executable), group(read  executable), other ((read  executable))
+
+ grep "pattern" file.txt
+gives system output of lines containing given string in file
+
+
+
+ kill PID
+killes the process
+
+
+ mkdir mydir && cd mydir && touch file.txt && echo "Hello, World!" > file.txt && cat file.txt
+will give system output with hello world and the file will be created in mydir directory 
+but here we will get error due to special character ! which we have to write in special format by using single quotes.
+
+
+
+ ls -l | grep ".txt"
+lists all the files with ending .txt
+
+ cat file1.txt file2.txt | sort | uniq
+It sorts the content in booth files combined and then prints unique elements
+
+ ls -l | grep "^d"
+lists all the long lists starting with d
+
+ grep -r "pattern" /path/to/directory/
+goes through files in the directory for the search word and then lists file name with line containing it
+
+
+ cat file1.txt file2.txt | sort | uniq –d
+
+
+ chmod 644 file.txt
+rw-r--r--
+
+
+ cp -r source_directory destination_directory
+copied whole directory
+
+ find /path/to/search -name "*.txt"
+finds the files in certian directory
+
+
+ chmod u+x file.txt
+gives user executavle permisions
+
+ echo $PATH
+This command will output a colon-separated list of directories.
+

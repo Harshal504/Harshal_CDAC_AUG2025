@@ -1,0 +1,142 @@
+Question 1: Write a shell script that prints "Hello, World!" to the terminal.
+
+#!/bin/bash
+echo 'Hello,World!"
+
+
+============================================================================
+Question 2: Declare a variable named "name" and assign the value "CDAC Mumbai" to it. Print the
+value of the variable.
+
+#!/bin/bash
+
+name="CDAC Mumbai"
+echo $name
+
+
+============================================================================
+Question 3: Write a shell script that takes a number as input from the user and prints it.
+#!/bin/bash
+
+read num
+echo $num
+
+============================================================================
+Question 4: Write a shell script that performs addition of two numbers (e.g., 5 and 3) and prints the
+result.
+#!/bin/bash
+num1=5
+num2=6
+
+echo $((num1 + num2))
+
+============================================================================
+Question 5: Write a shell script that takes a number as input and prints "Even" if it is even, otherwise
+prints "Odd".
+#!/bin/bash
+
+echo "Enter a number"
+read num
+
+if [[($num%2 -eq 0)]];then
+  echo "number is even"
+else
+  echo "number is odd"
+fi
+
+
+
+
+
+
+============================================================================
+Question 6: Write a shell script that uses a for loop to print numbers from 1 to 5.
+#!/bin/bash
+for var in 1 2 3 4 5
+do
+  echo $var
+done
+
+for var in {1..5}
+do
+  echo $var
+done
+
+
+===========================================================================
+Question 7: Write a shell script that uses a while loop to print numbers from 1 to 5.
+#!/bin/bash
+
+var=1
+
+while [ $var -le 5 ]
+do
+	echo $var
+	((var++))
+done
+
+============================================================================
+Question 8: Write a shell script that checks if a file named "file.txt" exists in the current directory. If it
+does, print "File exists", otherwise, print "File does not exist".
+#!/bin/bash
+
+if [[ -f file.txt ]];then
+        echo "file exists"
+else
+        echo "file does not exist"
+fi
+
+
+
+============================================================================
+Question 9: Write a shell script that uses the if statement to check if a number is greater than 10 and
+prints a message accordingly.
+
+#!/bin/bash
+read num
+if [[($num -gt 10)]];then
+	echo "number is greater than 10"
+else
+	echo "number is less than or equal to 10"
+fi
+
+============================================================================
+Question 10: Write a shell script that uses nested for loops to print a multiplication table for numbers
+from 1 to 5. The output should be formatted nicely, with each row representing a number and each
+column representing the multiplication result for that number.
+
+#!/bin/bash
+
+for var in {1..10}
+do
+	for var2 in {1..5}
+	do
+	  var1=$var
+		echo -n $(($var1 * $var2)) " " 
+		((var1++))
+	done
+	echo ""
+done
+
+
+
+============================================================================
+Question 11: Write a shell script that uses a while loop to read numbers from the user until the user enters
+a negative number. For each positive number entered, print its square. Use the break statement to exit the
+loop when a negative number is entered.
+
+#!/bin/bash
+
+while true
+do
+	echo "enter an number"
+	read num
+	
+	if [[ $num -lt 0 ]];then
+		echo " number is negative so exiting"
+		break
+	else
+		echo $((num * num))
+	fi
+done
+
