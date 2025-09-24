@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rat in a Maze Algorithm Presentation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <style>
+        .code-block {
+            background-color: #2d2d2d;
+            color: #f8f8f2;
+            border-radius: 8px;
+            padding: 20px;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+        .highlight {
+            background-color: #4a5568;
+            padding: 2px 4px;
+            border-radius: 4px;
+            color: #f7fafc;
+        }
+        .maze-cell {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        .pathway {
+            background-color: #48bb78;
+            color: white;
+        }
+        .blocked {
+            background-color: #e53e3e;
+            color: white;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans">
+    <div id="vanta-bg" class="fixed inset-0 -z-10"></div>
+    
+    <div class="container mx-auto px-4 py-12 max-w-6xl">
+        <!-- Header -->
+        <header class="text-center mb-16" data-aos="fade-down">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">Rat in a Maze Algorithm</h1>
+            <p class="text-xl text-gray-600">A recursive backtracking solution</p>
+        </header>
+
+        <!-- Introduction Section -->
+        <section class="bg-white rounded-xl shadow-lg p-8 mb-12" data-aos="fade-up">
+            <div class="flex items-center mb-6">
+                <i data-feather="info" class="text-blue-500 mr-3"></i>
+                <h2 class="text-2xl font-semibold text-gray-800">Problem Statement</h2>
+            </div>
+            <p class="text-gray-700 mb-6">
+                Given an N x N maze matrix where 1 represents a valid path and 0 represents a blocked cell, 
+                we need to find all possible paths from the top-left corner (0,0) to the bottom-right corner (N-1,N-1).
+                The rat can move in four directions: Down (D), Up (U), Right (R), Left (L).
+            </p>
+            
+            <div class="flex flex-col md:flex-row items-center justify-between">
+                <div class="mb-6 md:mb-0">
+                    <h3 class="text-lg font-medium text-gray-800 mb-3">Example Maze:</h3>
+                    <div class="grid grid-cols-4 gap-1 w-fit mx-auto">
+                        <div class="maze-cell pathway">1</div>
+                        <div class="maze-cell blocked">0</div>
+                        <div class="maze-cell blocked">0</div>
+                        <div class="maze-cell blocked">0</div>
+                        
+                        <div class="maze-cell pathway">1</div>
+                        <div class="maze-cell pathway">1</div>
+                        <div class="maze-cell blocked">0</div>
+                        <div class="maze-cell pathway">1</div>
+                        
+                        <div class="maze-cell pathway">1</div>
+                        <div class="maze-cell pathway">1</div>
+                        <div class="maze-cell blocked">0</div>
+                        <div class="maze-cell blocked">0</div>
+                        
+                        <div class="maze-cell blocked">0</div>
+                        <div class="maze-cell pathway">1</div>
+                        <div class="maze-cell pathway">1</div>
+                        <div class="maze-cell pathway">1</div>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-lg font-medium text-gray-800 mb-3">Possible Paths:</h3>
+                    <div class="bg-green-100 p-4 rounded-lg">
+                        <p class="font-mono text-green-800">DDRDRR</p>
+                        <p class="font-mono text-green-800">DRDDRR</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Algorithm Explanation -->
+        <section class="bg-white rounded-xl shadow-lg p-8 mb-12" data-aos="fade-up">
+            <div class="flex items-center mb-6">
+                <i data-feather="cpu" class="text-purple-500 mr-3"></i>
+                <h2 class="text-2xl font-semibold text-gray-800">Algorithm Breakdown</h2>
+            </div>
+            
+            <div class="space-y-6">
+                <div>
+                    <h3 class="text-lg font-medium text-gray-800 mb-2">1. Recursive Backtracking Approach</h3>
+                    <p class="text-gray-700">
+                        The solution uses <span class="highlight">depth-first search (DFS)</span> with backtracking to explore all possible paths:
+                    </p>
+                    <ul class="list-disc pl-6 mt-2 space-y-1 text-gray-700">
+                        <li>Mark current cell as visited (set to 0)</li>
+                        <li>Recursively explore all four directions (Down, Up, Right, Left)</li>
+                        <li>If destination is reached, save the path</li>
+                        <li>Backtrack by unmarking the current cell (set back to 1)</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-medium text-gray-800 mb-2">2. Base Cases</h3>
+                    <p class="text-gray-700">
+                        The recursion stops when:
+                    </p>
+                    <ul class="list-disc pl-6 mt-2 space-y-1 text-gray-700">
+                        <li>Current cell is out of bounds (x or y is -1 or N)</li>
+                        <li>Current cell is blocked (value is 0)</li>
+                        <li>Destination cell is reached (x = N-1 and y = N-1)</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-medium text-gray-800 mb-2">3. Path Construction</h3>
+                    <p class="text-gray-700">
+                        The path is built incrementally by appending direction letters:
+                    </p>
+                    <div class="bg-gray-800 text-green-400 p-4 rounded-lg mt-2">
+                        <pre>path + "D"  // Down
+path + "U"  // Up
+path + "R"  // Right
+path + "L"  // Left</pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Code Walkthrough -->
+        <section class="bg-white rounded-xl shadow-lg p-8 mb-12" data-aos="fade-up">
+            <div class="flex items-center mb-6">
+                <i data-feather="code" class="text-yellow-500 mr-3"></i>
+                <h2 class="text-2xl font-semibold text-gray-800">Code Walkthrough</h2>
+            </div>
+            
+            <div class="space-y-8">
+                <div>
+                    <h3 class="text-lg font-medium text-gray-800 mb-3">Main Method</h3>
+                    <div class="code-block">
+                        <pre><span class="text-blue-400">public static void</span> <span class="text-purple-400">main</span>(String[] args) {
+    <span class="text-gray-500">// Maze definition</span>
+    <span class="text-blue-400">int</span>[][] maze = {
+        {<span class="text-green-400">1</span>, <span class="text-green-400">0</span>, <span class="text-green-400">0</span>, <span class="text-green-400">0</span>},
+        {<span class="text-green-400">1</span>, <span class="text-green-400">1</span>, <span class="text-green-400">0</span>, <span class="text-green-400">1</span>},
+        {<span class="text-green-400">1</span>, <span class="text-green-400">1</span>, <span class="text-green-400">0</span>, <span class="text-green-400">0</span>},
+        {<span class="text-green-400">0</span>, <span class="text-green-400">1</span>, <span class="text-green-400">1</span>, <span class="text-green-400">1</span>}
+    };
+    
+    N = maze.length; <span class="text-gray-500">// Set maze size</span>
+    List&lt;String&gt; results = findPath(maze);
+    System.out.println(results);
+}</pre>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-medium text-gray-800 mb-3">findPath Method</h3>
+                    <div class="code-block">
+                        <pre><span class="text-blue-400">static</span> List&lt;String&gt; <span class="text-purple-400">findPath</span>(<span class="text-blue-400">int</span>[][] maze) {
+    List&lt;String&gt; paths = <span class="text-blue-400">new</span> ArrayList&lt;&gt;();
+    
+    <span class="text-gray-500">// Check if starting cell is valid</span>
+    <span class="text-blue-400">if</span>(maze[<span class="text-green-400">0</span>][<span class="text-green-400">0</span>] == <span class="text-green-400">0</span>) {
+        <span class="text-blue-400">return</span> paths;
+    }
+    
+    solveMaze(maze, <span class="text-green-400">0</span>, <span class="text-green-400">0</span>, <span class="text-yellow-300">""</span>, paths);
+    <span class="text-blue-400">return</span> paths;
+}</pre>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-medium text-gray-800 mb-3">solveMaze Method</h3>
+                    <div class="code-block">
+                        <pre><span class="text-blue-400">static void</span> <span class="text-purple-400">solveMaze</span>(<span class="text-blue-400">int</span>[][] maze, <span class="text-blue-400">int</span> y, <span class="text-blue-400">int</span> x, String path, List&lt;String&gt; paths) {
+    <span class="text-gray-500">// Base case: out of bounds or blocked cell</span>
+    <span class="text-blue-400">if</span>(x == -<span class="text-green-400">1</span> || y == -<span class="text-green-400">1</span> || x == N || y == N || maze[y][x] == <span class="text-green-400">0</span>) {
+        <span class="text-blue-400">return</span>;
+    }
+    
+    <span class="text-gray-500">// Base case: reached destination</span>
+    <span class="text-blue-400">if</span>(x == N-<span class="text-green-400">1</span> && y == N-<span class="text-green-400">1</span>) {
+        paths.add(path);
+        <span class="text-blue-400">return</span>;
+    }
+    
+    maze[y][x] = <span class="text-green-400">0</span>; <span class="text-gray-500">// Mark as visited</span>
+    
+    <span class="text-gray-500">// Explore all four directions</span>
+    solveMaze(maze, y+<span class="text-green-400">1</span>, x, path+<span class="text-yellow-300">"D"</span>, paths); <span class="text-gray-500">// Down</span>
+    solveMaze(maze, y-<span class="text-green-400">1</span>, x, path+<span class="text-yellow-300">"U"</span>, paths); <span class="text-gray-500">// Up</span>
+    solveMaze(maze, y, x+<span class="text-green-400">1</span>, path+<span class="text-yellow-300">"R"</span>, paths); <span class="text-gray-500">// Right</span>
+    solveMaze(maze, y, x-<span class="text-green-400">1</span>, path+<span class="text-yellow-300">"L"</span>, paths); <span class="text-gray-500">// Left</span>
+    
+    maze[y][x] = <span class="text-green-400">1</span>; <span class="text-gray-500">// Backtrack (unmark)</span>
+}</pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Complexity Analysis -->
+        <section class="bg-white rounded-xl shadow-lg p-8 mb-12" data-aos="fade-up">
+            <div class="flex items-center mb-6">
+                <i data-feather="bar-chart-2" class="text-red-500 mr-3"></i>
+                <h2 class="text-2xl font-semibold text-gray-800">Complexity Analysis</h2>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-gray-50 p-6 rounded-lg">
+                    <h3 class="text-lg font-medium text-gray-800 mb-3">Time Complexity</h3>
+                    <p class="text-gray-700">
+                        The time complexity is <span class="highlight">O(4^(N²))</span> in the worst case where we have to explore all possible paths.
+                    </p>
+                    <p class="text-gray-700 mt-2">
+                        This is because from each cell, there are 4 possible directions to explore, and in the worst case we might visit all N² cells.
+                    </p>
+                </div>
+                
+                <div class="bg-gray-50 p-6 rounded-lg">
+                    <h3 class="text-lg font-medium text-gray-800 mb-3">Space Complexity</h3>
+                    <p class="text-gray-700">
+                        The space complexity is <span class="highlight">O(N²)</span> due to the recursion stack.
+                    </p>
+                    <p class="text-gray-700 mt-2">
+                        In the worst case, the recursion depth can go up to N² when the rat needs to visit every cell before finding the path.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Conclusion -->
+        <section class="bg-white rounded-xl shadow-lg p-8" data-aos="fade-up">
+            <div class="flex items-center mb-6">
+                <i data-feather="check-circle" class="text-green-500 mr-3"></i>
+                <h2 class="text-2xl font-semibold text-gray-800">Key Takeaways</h2>
+            </div>
+            
+            <div class="space-y-4">
+                <div class="flex items-start">
+                    <div class="bg-blue-100 p-2 rounded-full mr-4">
+                        <i data-feather="refresh-cw" class="text-blue-500 w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-medium text-gray-800">Backtracking</h3>
+                        <p class="text-gray-700">The algorithm marks cells as visited and unmarks them during backtracking to explore all possible paths.</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-start">
+                    <div class="bg-purple-100 p-2 rounded-full mr-4">
+                        <i data-feather="layers" class="text-purple-500 w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-medium text-gray-800">Recursion</h3>
+                        <p class="text-gray-700">DFS is implemented recursively to explore each path until it hits a base case.</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-start">
+                    <div class="bg-green-100 p-2 rounded-full mr-4">
+                        <i data-feather="list" class="text-green-500 w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-medium text-gray-800">Path Construction</h3>
+                        <p class="text-gray-700">Paths are built incrementally by appending direction letters at each recursive step.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.globe.min.js"></script>
+    <script>
+        VANTA.GLOBE({
+            el: "#vanta-bg",
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            scale: 1.00,
+            scaleMobile: 1.00,
+            color: 0x4f46e5,
+            backgroundColor: 0xf1f5f9,
+            size: 0.80
+        });
+    </script>
+    <script>
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true
+        });
+        feather.replace();
+    </script>
+</body>
+</html>
